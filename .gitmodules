@@ -1,0 +1,3 @@
+[submodule "data/x86-encoding-csv"]
+	path = data/x86-encoding-csv
+	url = https://github.com/hemashushu/x86-encoding-csv.git
