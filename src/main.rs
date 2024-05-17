@@ -54,6 +54,14 @@ struct EncodingRecord {
     description: String,
 }
 
+/**
+ * Convert the original table into a simplified one.
+ *
+ * Only the following fildes are needed:
+ * - 'instruction': the syntax of instruction
+ * - 'opcode': the description of encoding
+ * - 'operand1' ... 'operand4': the detail of operands.
+ */
 fn convert_csv_to_ason() -> Result<(), Box<dyn Error>> {
     let mut dest_records = vec![];
 
@@ -62,7 +70,6 @@ fn convert_csv_to_ason() -> Result<(), Box<dyn Error>> {
     for source_record_result in reader.deserialize::<EncodingRecord>() {
         let source_record = source_record_result?;
         if source_record.valid_64 == "Valid" {
-            // only 'instruction', 'opcode', 'operand1', 'operand2', 'operand3', 'operand4' are needed.
             let dest_record = AsonNode::Tuple(vec![
                 AsonNode::String_(source_record.instruction),
                 AsonNode::String_(source_record.opcode),
